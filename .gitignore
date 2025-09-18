@@ -286,6 +286,10 @@ $RECYCLE.BIN/
 *.lnk
 
 #################### Custom.gitignore ####################
+*.pdf
+
+
+#################### Custom.gitignore ####################
 
 # add your custom gitignore here:
 !.gitignore
