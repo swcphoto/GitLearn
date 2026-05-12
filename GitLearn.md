@@ -32,6 +32,8 @@
 * 创建分支 `git checkout -b <branch-name>`
 * 切换分支 `git switch <branch-name>`
 * 切换分支 `git checkout <branch-name>`
+* 重命名当前分支 `git branch -m <new-branch-name>`
+* 重命名非当前分支 `git branch -m <old-branch-name> <new-branch-name> `
 
 # 删除文件
 * 语法 `git rm [option] <file>...`
@@ -71,6 +73,8 @@ git commit -m "remove file.txt
         * 后续推送 `git push`
 
 * 管理多个远程仓库
+
+* 删除远程分支 `git push <repo-name> --delete <branch-name>`
 
 ```bash
 # 添加主仓库
@@ -147,4 +151,34 @@ git remote add company https://gitlab.company.com/project.git
 - 推送所有标签 `git push origin --tags`
 - 删除标签 `git tag -d <tag-name>`
 - 删除远程标签 `git push origin :refs/tags/<tagname>`
+
+# rebase 
+- 更改当前分支的目标基底 git rebase <目标基底>
+- 更换指定分支的目标基底 git rebase <目标基底> <指定分支>
+
+
+# 分离HEAD
+- HEAD指向某次提交或分支 `git checkout <commit-hash/branch>`
+- 相对引用，将HEAD指向上一次提交 `git checkout HEAD^`
+- 相对引用，当前节点有两个父节点时 `git checkout HEAD^` `git checkout HEAD^2`可以指向不同父节点
+- 绝对引用 `git check HEAD~3`
+
+# 撤销提交
+- `git reset HEAD^`
+- `git revert HEAD`
+
+# 提取单个提交
+- `git cherry-pick <commit-id> ... `
+
+# 交互式变基
+- `git rebase -i HEAD~4`
+
+- `git describe`
+
+- 创建分支并直接关联远程分支 `git checkout -b <master> <origin/master>`
+- 关联当前分支到远程分支 `git branch -u origin/master`
+- 首次推送并关联(当前分支) `git push -u origin master`
+- 取消关联当前分支 `git branch --unset-upstream`
+- 取消关联指定分支 `git branch --unset-upstream <branch-name>`
+- 查看关联 `git branch -vv`
 
