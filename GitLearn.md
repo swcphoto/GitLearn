@@ -94,6 +94,22 @@ git remote add company https://gitlab.company.com/project.git
     * 更改远程仓库URL `git remote set-url origin https://github.com/yourname/new-repo.git`
 
 
+- 创建分支并直接关联远程分支 `git checkout -b <master> <origin/master>`
+- 将本地某分支管理远程分支 `git branch -u <origin/branch> <local/branch>`
+- 关联当前分支到远程分支 `git branch -u origin/master`
+- 首次推送并关联(当前分支) `git push -u origin master`
+- 取消关联当前分支 `git branch --unset-upstream`
+- 取消关联指定分支 `git branch --unset-upstream <branch-name>`
+- 查看关联 `git branch -vv`
+- `git push <origin> <local/branch>`
+- 指定推送来源及目的地 `git push origin <source>:<destination>`
+-  将foo分支的提交同步至远程main分支（截止至foo的上一条提交） `git push origin foo^:main`
+- 将本地main分支的提交同步到远程的newBranch分支 `git push origin main:newBranch`
+- 拉取远程分支 `git fetch <origin> <branch>`
+- `git fetch origin <source>:<destination>`
+- `git pull origin main:foo` 将远程的main分支下载到本地foo分支，将foo分支合并到当前分支
+
+
 # 克隆远程仓库
 * 克隆 `git clone <URL>`
 
@@ -175,10 +191,5 @@ git remote add company https://gitlab.company.com/project.git
 
 - `git describe`
 
-- 创建分支并直接关联远程分支 `git checkout -b <master> <origin/master>`
-- 关联当前分支到远程分支 `git branch -u origin/master`
-- 首次推送并关联(当前分支) `git push -u origin master`
-- 取消关联当前分支 `git branch --unset-upstream`
-- 取消关联指定分支 `git branch --unset-upstream <branch-name>`
-- 查看关联 `git branch -vv`
+
 
