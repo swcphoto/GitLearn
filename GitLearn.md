@@ -101,7 +101,18 @@ git remote add company https://gitlab.company.com/project.git
 - 取消关联当前分支 `git branch --unset-upstream`
 - 取消关联指定分支 `git branch --unset-upstream <branch-name>`
 - 查看关联 `git branch -vv`
+
 - `git push <origin> <local/branch>`
+- option
+    - -u --set‑upstream	设置上游追踪分支，设置后直接简写git push	git push -u origin master
+    - -f --force	强制推送，直接覆盖远程，危险，多人协作慎用	git push -f origin master
+    - --force‑with‑lease	安全强制推送；远程有他人新提交则拒绝，推荐替代 -f	git push --force-with-lease origin master
+    - --dry‑run	模拟推送，仅打印操作，不会真实上传代码	git push --dry-run origin master
+    - --tags	推送全部本地标签到远程仓库	git push --tags origin
+    - --all	推送本地所有分支	git push --all origin
+    - --delete	删除远程分支	git push --delete origin dev
+    - --no‑verify	跳过 pre‑push 钩子，不执行提交前校验	git push --no-verify
+    
 - 指定推送来源及目的地 `git push origin <source>:<destination>`
 -  将foo分支的提交同步至远程main分支（截止至foo的上一条提交） `git push origin foo^:main`
 - 将本地main分支的提交同步到远程的newBranch分支 `git push origin main:newBranch`
@@ -109,6 +120,33 @@ git remote add company https://gitlab.company.com/project.git
 - `git fetch origin <source>:<destination>`
 - `git pull origin main:foo` 将远程的main分支下载到本地foo分支，将foo分支合并到当前分支
 
+# git push & pull
+- `git push [option] <remote> [<local_branch:remote_branch>]`
+    - `remote`：远程仓库别名，通常为`origin`
+    - `refspec`格式：`本地分支:远程分支`
+        - 本地master推送到远程 master `git push origin master`
+        - 本地dev推送到远程 feature/v1 `git push origin dev:feature/v1`
+        - 删除远程dev分支  `git push origin :dev`
+    - 高频实操示例
+        - 首次推送并绑定上游分支 `git push -u origin master`
+        - 重写commit后安全强制推送 `git push --force-with-lease origin master`
+        - 删除远程test分支 `git push --delete origin test`
+        - 预演推送，查看会提交哪些内容，不上传 `git push --dry-run origin master`
+        - 绑定上游后简写，无需写origin和分支名 `git push`
+
+- `git pull [option] <remote> [<remote_branch>:<local_branch>]`
+    - option
+        - --no‑rebase	使用普通 merge 合并，git pull 原始默认行为	git pull --no-rebase origin master
+        - --rebase	拉取后使用变基rebase代替 merge 合并，保持线性提交历史，日常推荐	git pull --rebase origin master
+        - --dry‑run	模拟拉取，不改动本地代码	git pull --dry-run origin master
+        - -s / --strategy	指定合并策略	git pull -s resolve origin master
+        - -X / --strategy‑option	给合并策略传递参数，设置冲突处理逻辑	git pull -X theirs origin master
+    - 拉取远程master，合并到当前本地分支 git pull origin master
+    - 拉取远程master，合并到本地dev分支（不需要切到dev） git pull origin master:dev
+    - git pull origin master 等价于 git fetch origin & git merge origin/master
+    - git pull --rebase origin master 等价于 git fetch origin & git rebase origin/master
+    - 默认merge方式拉取代码 git pull origin master
+    - rebase变基拉取（推荐，历史干净无多余merge节点）git pull --rebase origin master
 
 # 克隆远程仓库
 * 克隆 `git clone <URL>`
@@ -190,6 +228,15 @@ git remote add company https://gitlab.company.com/project.git
 - `git rebase -i HEAD~4`
 
 - `git describe`
+
+# 配置用户参数
+- 配置用户名 `git config --global user.name "newName"`
+- 配置邮箱 `git config --global user.email "newEmail"` 
+- 查看配置参数 `git config --global --list`
+
+# SSH秘钥
+- 生成ssh秘钥 `ssh-keygen -t rsa` 
+- 测试ssh配置是否成功
 
 
 
